@@ -12,25 +12,11 @@ public class Location implements DisasterVictimSearch {
     private Set<DisasterVictim> occupants;
     private HashMap<String,Integer> supplies;
 
-    private Location() {
-        this.address="2500 University Dr NW, Calgary, AB T2N 1N4";
-        this.name="UofC";
-        this.occupants = new HashSet<>();
-        occupants.add(new DisasterVictim("Jane", "2024-02-23"));
-        occupants.add(new DisasterVictim("John", "2024-02-24"));
-        occupants.add(new DisasterVictim("Jack", "2024-02-25"));
-        this.supplies = new HashMap<>();
-        supplies.put("water bottles", 500);
-        supplies.put("blankets", 250);
-        supplies.put("first aid kits", 50);
-        supplies.put("food kits", 200);
+    public Location(String name, String address) {
+        this.address=address;
+        this.name=name;
     }
-    public static Location getInstance() {
-        if (instance == null) {
-            instance = new Location();
-        }
-        return instance;
-    }
+
 
     public void setName(String name) {
         this.name=name;
@@ -51,10 +37,11 @@ public class Location implements DisasterVictimSearch {
         this.occupants.remove(occupant);
     }
     public void addSupply(String type, int quantity) {
-
-        int currentQuantity = supplies.getOrDefault(type, 0);
-        int newQuantity = currentQuantity + quantity;
-        supplies.put(type, newQuantity);
+        if (quantity > 0) {
+            int currentQuantity = supplies.getOrDefault(type, 0);
+            int newQuantity = currentQuantity + quantity;
+            supplies.put(type, newQuantity);
+        }
     }
     public boolean removeSupply(String type, int quantity) {
         if (supplies.containsKey(type)) {
@@ -88,7 +75,13 @@ public class Location implements DisasterVictimSearch {
     }
 
 
-
+    public int getSupplyQuantity(String supply) {
+        if (this.supplies.containsKey(supply)) {
+            return(this.supplies.get(supply));
+        }else{
+            return(0);
+        }
+    }
     public String getName() {return this.name;}
     public String getAddress() {return this.address;}
     public Set<DisasterVictim> getOccupants(){return this.occupants;}

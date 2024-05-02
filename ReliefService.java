@@ -22,7 +22,7 @@ public class ReliefService {
         this.missingPerson=missingPerson;
         this.dateOfInquiry=dateOfInquiry;
         this.infoProvided = infoProvided;
-        this.lastKnownLocation= Location.getInstance();
+        this.lastKnownLocation= lastKnownLocation;
     }
 
     public void setInquirer(Inquirer inquirer) {

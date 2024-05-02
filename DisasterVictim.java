@@ -108,7 +108,7 @@ public class DisasterVictim {
     public void setGender(String gender) {
         this.gender=gender;
     }
-    public void addDietaryRestrictions(DietaryRestriction restriction) {
+    public void addDietaryRestriction(DietaryRestriction restriction) {
         this.dietaryRestrictions.add(restriction);
     }
     public void addPersonalBelonging(String type, int quantity) {
@@ -150,6 +150,42 @@ public class DisasterVictim {
             System.out.println(restriction);
         }
     }
+    public boolean hasDuplicateRelationship(DisasterVictim personTwo) {
+        for (FamilyRelation relation : familyConnections) {
+            if ((relation.getPersonOne().equals(this) && relation.getPersonTwo().equals(personTwo)) ||
+                    (relation.getPersonOne().equals(personTwo) && relation.getPersonTwo().equals(this))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasCompleteSeries(DisasterVictim otherPerson) {
+        DisasterVictim thirdPerson = null;
+
+        for (FamilyRelation relation : familyConnections) {
+            if (!relation.getPersonOne().equals(this) && !relation.getPersonTwo().equals(this)) {
+                thirdPerson = relation.getPersonOne().equals(otherPerson) ? relation.getPersonTwo() : relation.getPersonOne();
+                break;
+            }
+        }
+
+
+        
+        boolean hasRelationWithThird = false;
+        boolean hasRelationWithOther = false;
+        for (FamilyRelation relation : familyConnections) {
+            if ((relation.getPersonOne().equals(this) && relation.getPersonTwo().equals(thirdPerson)) ||
+                    (relation.getPersonOne().equals(thirdPerson) && relation.getPersonTwo().equals(this))) {
+                hasRelationWithThird = true;
+            } else if ((relation.getPersonOne().equals(otherPerson) && relation.getPersonTwo().equals(thirdPerson)) ||
+                    (relation.getPersonOne().equals(thirdPerson) && relation.getPersonTwo().equals(otherPerson))) {
+                hasRelationWithOther = true;
+            }
+        }
+        return hasRelationWithThird && hasRelationWithOther;
+    }
+
+
     public String getFirstName() {return(this.firstName);}
     public String getLastName() {return(this.lastName);}
     public String getDateOfBirth() {return(this.dateOfBirth);}

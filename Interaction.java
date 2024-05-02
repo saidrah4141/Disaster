@@ -3,18 +3,18 @@
 public class Interaction {
 
     private String interactionID;
-    private String timestamp;
+    private String date;
     private String details;
 
-    public Interaction(String interactionID, String time, String detail) {
+    public Interaction(String interactionID, String date, String detail) {
 
         this.interactionID=interactionID;
-        this.timestamp=time;
+        this.date=date;
         this.details=detail;
 
     }
 
     public String getInteractionID() {return this.interactionID;}
-    public String getTimestamp() {return this.timestamp;}
+    public String getDate() {return this.date;}
     public String getDetails() {return this.details;}
 }
