@@ -3,10 +3,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Location implements DisasterVictimSearch {
-    private static Location instance;
+    
     private String name;
     private String address;
     private Set<DisasterVictim> occupants;
@@ -15,6 +16,8 @@ public class Location implements DisasterVictimSearch {
     public Location(String name, String address) {
         this.address=address;
         this.name=name;
+        this.occupants = new HashSet<>(); 
+        this.supplies=new HashMap<String,Integer>();
     }
 
 
@@ -63,7 +66,16 @@ public class Location implements DisasterVictimSearch {
             return false;
         }
     }
-
+    @Override
+    public List<DisasterVictim> searchByPartialFirstName(String partialFirstName, Set<DisasterVictim> victimList) {
+        List<DisasterVictim> matchingVictims = new ArrayList<>();
+        for (DisasterVictim victim : victimList) {
+            if (victim.getFirstName().toLowerCase().contains(partialFirstName.toLowerCase())) {
+                matchingVictims.add(victim);
+            }
+        }
+        return matchingVictims;
+    }
     @Override
     public DisasterVictim searchByFirstName(String firstName, Set<DisasterVictim> victimList) {
         for (DisasterVictim victim : victimList) {
@@ -73,7 +85,6 @@ public class Location implements DisasterVictimSearch {
         }
         return null;
     }
-
 
     public int getSupplyQuantity(String supply) {
         if (this.supplies.containsKey(supply)) {

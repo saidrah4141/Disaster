@@ -1,10 +1,13 @@
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public interface DisasterVictimSearch {
 
-    DisasterVictim searchByFirstName(String firstName, Set<DisasterVictim> victimList);
+    List<DisasterVictim> searchByPartialFirstName(String partialFirstName, Set<DisasterVictim> victimList);
+
+	DisasterVictim searchByFirstName(String firstName, Set<DisasterVictim> victimList);
 
 
 }

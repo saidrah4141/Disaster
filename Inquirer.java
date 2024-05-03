@@ -14,8 +14,8 @@ public class Inquirer {
         this.interactionLog = new HashMap<>();
     }
 
-    public void logInteraction(DisasterVictim victim, Interaction interaction) {
-        this.interactionLog.put(victim, interaction);
+    public void logInteraction(DisasterVictim foundVictim, Interaction interaction) {
+        this.interactionLog.put(foundVictim, interaction);
     }
 
     public String getFirstName() {
@@ -32,4 +32,6 @@ public class Inquirer {
     public String getInteractionDetails(DisasterVictim victim){
         return(interactionLog.get(victim).getDetails());
     }
+
+	
 }
