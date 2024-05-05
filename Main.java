@@ -239,8 +239,7 @@ public class Main implements ReliefServiceInterface{
 	                    case 6:
 	                    	try {
 	                            
-	                            String filePath =  "30171486" + File.separator + "src"+ File.separator+
-	                            "edu" + File.separator + "ucalgary" + File.separator + "oop" + File.separator + "GenderOptions.txt";
+	                            String filePath = "GenderOptions.txt";
 	                          
 	                            List<String> genderOptions = FileRead.readLines(filePath);
 	                            
@@ -395,12 +394,8 @@ public class Main implements ReliefServiceInterface{
 	 
 	 }
 	 private static void addVictimFamilyConnection(DisasterVictim victim) {
-		  for (DisasterVictim occupant : reliefCenter.getOccupants()) {
-	            System.out.println(occupant.getFirstName() + ": " + occupant);
-	        }
-		 System.out.println("Enter the first name of the victim to add to " + victim.getFirstName() + "'s family connection: ");
-	        String firstNameToSearch = scanner.nextLine();
-	        DisasterVictim foundVictim = reliefCenter.searchByFirstName(firstNameToSearch, reliefCenter.getOccupants());
+		 
+	        DisasterVictim foundVictim = searchVictimByName(scanner);
 
 	        if (foundVictim != null) {
 	            
@@ -422,10 +417,7 @@ public class Main implements ReliefServiceInterface{
 
 	            System.out.println("Relationship added successfully between " + victim.getFirstName() + " and " + foundVictim.getFirstName() + ".");
 	           
-	        } else {
-	            System.out.println("Victim with first name '" + firstNameToSearch + "' not found.");
-	        }
-	        
+	        } 
 	 }
 	 
 	 @Override
