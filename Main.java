@@ -181,7 +181,7 @@ public class Main implements ReliefServiceInterface{
 	                System.out.println("Last Name: " + foundVictim.getLastName());
 	                System.out.println("Age: " + foundVictim.getAge()); 
 	                System.out.println("Date of Birth: " + foundVictim.getDateOfBirth());
-	                System.out.println("Medical Records: " + foundVictim.getMedicalRecords());
+	                System.out.println("Medical Records:  " + foundVictim.getMedicalRecords());
 	                System.out.println("Personal Belongings: " + foundVictim.getPersonalBelongings());
 	                System.out.println("Gender: " + foundVictim.getGender());
 	                System.out.println("Dietary Restrictions: " + foundVictim.getDietaryRestrictions());
