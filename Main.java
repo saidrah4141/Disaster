@@ -411,14 +411,41 @@ public class Main implements ReliefServiceInterface{
 
 	            FamilyRelation newRelation1 = new FamilyRelation(victim, relationship, foundVictim);
 	            victim.addFamilyConnection(newRelation1);
-
 	            FamilyRelation newRelation2 = new FamilyRelation(foundVictim, relationship, victim);
 	            foundVictim.addFamilyConnection(newRelation2);
+	          
 
 	            System.out.println("Relationship added successfully between " + victim.getFirstName() + " and " + foundVictim.getFirstName() + ".");
+	            
+	            if (!victim.hasCompleteSeries(foundVictim)) {
+	               
+	                updateFamilyRelations(victim, foundVictim);
+	            }
 	           
 	        } 
 	 }
+	 private static void updateFamilyRelations(DisasterVictim victim, DisasterVictim foundVictim) {
+		    
+		    DisasterVictim thirdPerson = null;
+		    for (FamilyRelation relation : victim.getFamilyConnections()) {
+	            if (!relation.getPersonOne().equals(foundVictim) && !relation.getPersonTwo().equals(foundVictim)) {
+	                thirdPerson = relation.getPersonOne().equals(victim) ? relation.getPersonTwo() : relation.getPersonOne();
+	                break;
+	            }
+	        }
+
+
+		    
+		    for (FamilyRelation relation : victim.getFamilyConnections()) {
+		        if (relation.getPersonOne().equals(thirdPerson) || relation.getPersonTwo().equals(thirdPerson)) {
+		        	FamilyRelation newRelation1 = new FamilyRelation(thirdPerson, relation.getRelationshipTo(), foundVictim);
+		        	foundVictim.addFamilyConnection(newRelation1);
+		        	FamilyRelation newRelation2 = new FamilyRelation(foundVictim, relation.getRelationshipTo(), thirdPerson);
+		        	thirdPerson.addFamilyConnection(newRelation2);
+		        }
+		    }
+		}
+
 	 
 	 @Override
 	 public void logInquirerQueries() {
