@@ -439,7 +439,7 @@ public class Main implements ReliefServiceInterface{
 		    for (FamilyRelation relation : victim.getFamilyConnections()) {
 		        if (relation.getPersonOne().equals(thirdPerson) || relation.getPersonTwo().equals(thirdPerson)) {
 		        	FamilyRelation newRelation1 = new FamilyRelation(thirdPerson, relation.getRelationshipTo(), foundVictim);
-		        	foundVictim.addFamilyConnection(newRelation1);
+		        	foundVictim.addFamilyConnection(newRelation1 );
 		        	FamilyRelation newRelation2 = new FamilyRelation(foundVictim, relation.getRelationshipTo(), thirdPerson);
 		        	thirdPerson.addFamilyConnection(newRelation2);
 		        }
